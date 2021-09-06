@@ -1,5 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
 import { ProjectOwnerRegiseterDto } from './dto/project-owner.register.dto';
 
 @Controller()
@@ -15,12 +16,12 @@ export class AuthController {
     }
 
     @Get('login')
-    async logIn(){
-        
+    async logIn(loginDto: LoginDto){
+        return this.authService.login(loginDto);
     }
 
     @Get('/admin/login')
-    async adminLogIn(){
+    async adminLogIn(loginDto: LoginDto){
 
     }
 }
