@@ -5,13 +5,13 @@ import { Project } from './project.schema';
 
 @Schema()
 export class ProjectOwner extends Document {
-    @Prop()
+    @Prop({ required: true })
     username: string;
 
-    @Prop()
+    @Prop({ required: true, unique: true })
     email: string;
 
-    @Prop()
+    @Prop({ required: true })
     password: string;
 
     @Prop({default: []})
