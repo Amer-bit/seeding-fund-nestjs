@@ -14,17 +14,19 @@ export class UserRepository {
         @InjectModel(Admin.name) private adminModel: Model<Admin>
     ){}
 
-    async register(registerDto: ProjectOwnerRegiseterDto): Promise<void>{
+    async register(registerDto: ProjectOwnerRegiseterDto): Promise<{ email: string }>{
         const { email, password, username } = registerDto;
         const projectOwner = new this.ownerModel();
         projectOwner.email = email;
         projectOwner.username = username;
         const hashedPassword = await this.hashPassword(password);
         projectOwner.password = hashedPassword;
-        this.saveModel(projectOwner);
+        await this.saveModel(projectOwner);
+        return { email };
+
     }
 
-    async login(loginDto: LoginDto): Promise<{email: string }>{
+    async login(loginDto: LoginDto): Promise<{ email: string }>{
         const { email, password } = loginDto;
         const projectOwner = await this.ownerModel.findOne({email});
         if(projectOwner){
@@ -34,6 +36,15 @@ export class UserRepository {
             }
         }
         return { email: null };
+    }
+
+    async getAllUsersProjectsAndUsername(): Promise<ProjectOwner[]>{
+        try {
+            const projectOwners = await this.ownerModel.find().select({username: 1, projects: 1})
+            return projectOwners;
+        } catch (error) {
+            throw new InternalServerErrorException;
+        }
     }
 
     async adminLogin(loginDto: LoginDto): Promise<{ email: string }>{

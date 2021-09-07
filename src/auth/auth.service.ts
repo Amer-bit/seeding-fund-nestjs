@@ -12,8 +12,11 @@ export class AuthService {
         private jwtService: JwtService,
     ){}
 
-    async register(registerDto: ProjectOwnerRegiseterDto){
-        return await this.userRepo.register(registerDto);
+    async register(registerDto: ProjectOwnerRegiseterDto): Promise<{accessToken: string}>{
+        const { email } = await this.userRepo.register(registerDto);
+        const payload : JwtPayload = {email};
+        const accessToken = await this.jwtService.signAsync(payload);
+        return {accessToken};
     }
 
     // Verify user password and email and return 
