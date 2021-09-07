@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
 import { ProjectOwner, projectOwnerSchema } from './schema/project-owner.schema';
 import { Admin, adminSchema } from './schema/admin.schema';
 import { PassportModule } from '@nestjs/passport';
+import { ProjectOwnerJwtStrategy } from './jwt.strategy';
+import { AdminJwtStrategy } from './admin-jwt.strategy';
 
 @Module({
   imports:[
@@ -28,10 +30,16 @@ import { PassportModule } from '@nestjs/passport';
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserRepository],
+  providers: [
+    AuthService, 
+    UserRepository, 
+    ProjectOwnerJwtStrategy, 
+    AdminJwtStrategy
+  ],
   exports: [
     JwtModule,
     PassportModule,
+    UserRepository
   ]
 })
 export class AuthModule {}

@@ -1,3 +1,5 @@
+import { ProjectStatus } from '../../project-owner/project-status.enum';
+
 export class Project {
     name: string;
 
@@ -5,5 +7,5 @@ export class Project {
 
     sector: string;
 
-    accepted: boolean;
+    status: ProjectStatus;
 }
