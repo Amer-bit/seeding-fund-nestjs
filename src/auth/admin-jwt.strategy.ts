@@ -8,7 +8,7 @@ import { JwtPayload } from "./access-token-payload";
 import { Admin } from "./schema/admin.schema";
 
 @Injectable()
-class AdminJwtStrategy extends PassportStrategy(Strategy, 'adminJwt'){
+export class AdminJwtStrategy extends PassportStrategy(Strategy, 'adminJwt'){
 constructor(
     @InjectModel(Admin.name) private adminModel: Model<Admin>,
     private configService: ConfigService,
