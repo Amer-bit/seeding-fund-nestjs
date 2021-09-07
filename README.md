@@ -34,3 +34,97 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+# Routes
+
+## Authentication
+
+* Endpoint: **POST (/register)**
+
+```
+Request: Body as JSON
+Body {
+    username: string;
+    email: string;
+    password: string;
+}
+
+Response: {accessToken}
+```
+
+
+* Endpoint: **POST (/login)**
+
+```
+Request: Body as JSON
+Body {
+    email: string;
+    password: string;
+}
+
+Response: {accessToken}
+```
+
+* Endpoint: **POST (/admin/login)**
+
+```
+Request: Body as JSON
+Body {
+    email: string;
+    password: string;
+}
+
+Response: {accessToken}
+```
+
+## Admin
+
+* Endpoint: **GET (/admin/viewfundrequest)**
+
+```
+Request: Body Null
+
+Response: {
+    _id: string;
+    username: string;
+    projects: Projects[];
+}
+```
+
+* Endpoint: **PUT (/admin/changefundstatus)**
+
+```
+Request: Body as JSON
+Body {
+    userId: string;
+    projectId: string;
+    status: pending or rejected or accepted
+}
+
+Response: Null
+```
+
+
+## Project Owner
+
+
+* Endpoint: **GET (/projectowner/viewfundrequest)**
+
+```
+Request: Request header must contain a valid token
+
+Response: Projects[]
+```
+
+* Endpoint: **POST (/projectowner/createfundrequest)**
+
+```
+Request: Body as JSON
+Body {
+    name: string;
+    description: string;
+    sector: IT or Financials or Industrials or Energy or Health Care
+}
+
+Response: Null
+```
