@@ -1,10 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Project } from './project.schema';
-
 
 @Schema()
-export class ProjectOwner extends Document {
+export class Admin extends Document {
     @Prop({ required: true })
     username: string;
 
@@ -13,9 +11,6 @@ export class ProjectOwner extends Document {
 
     @Prop({ required: true })
     password: string;
-
-    @Prop({default: []})
-    projects: Project[];
 }
 
-export const projectOwnerSchema = SchemaFactory.createForClass(ProjectOwner);
+export const adminSchema = SchemaFactory.createForClass(Admin);
