@@ -53,7 +53,7 @@ export class UserRepository {
         const { email, password } = loginDto;
         const admin = await this.adminModel.findOne({email});
         if(admin){
-            const passwordMatchCheck = this.comparePassword(password, admin.password);
+            const passwordMatchCheck = await this.comparePassword(password, admin.password);
             if(passwordMatchCheck){
                 return { email: admin.email };
             }
