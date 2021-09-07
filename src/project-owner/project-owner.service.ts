@@ -4,6 +4,8 @@ import { Project } from 'src/auth/schema/project.schema';
 import { UserRepository } from 'src/auth/user.repository';
 import { CreateFundRequestDto } from './dto/create-fund-request.dto';
 import { ProjectStatus } from './project-status.enum';
+import { nanoid } from 'nanoid';
+
 
 @Injectable()
 export class ProjectOwnerService {
@@ -12,11 +14,12 @@ export class ProjectOwnerService {
     async createFundRequest(user: ProjectOwner, createFundRequest: CreateFundRequestDto): Promise<void>{
         const { name, sector, description } = createFundRequest;
         const project: Project = {
+            id: nanoid(10),
             name,
             sector,
             description,
             status: ProjectStatus.pending,
-        }
+        };
         user.projects.push(project);
         this.userRepo.saveModel(user);
     }

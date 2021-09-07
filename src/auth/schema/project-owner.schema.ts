@@ -14,7 +14,7 @@ export class ProjectOwner extends Document {
     @Prop({ required: true })
     password: string;
 
-    @Prop({default: []})
+    @Prop({ default: [] })
     projects: Project[];
 }
 
