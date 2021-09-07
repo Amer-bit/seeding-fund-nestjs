@@ -13,7 +13,7 @@ export class AuthService {
     ){}
 
     async register(registerDto: ProjectOwnerRegiseterDto){
-        return this.userRepo.register(registerDto);
+        return await this.userRepo.register(registerDto);
     }
 
     // Verify user password and email and return 

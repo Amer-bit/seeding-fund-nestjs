@@ -28,7 +28,7 @@ export class UserRepository {
         const { email, password } = loginDto;
         const projectOwner = await this.ownerModel.findOne({email});
         if(projectOwner){
-            const passwordMatchCheck = this.comparePassword(password, projectOwner.password);
+            const passwordMatchCheck = await this.comparePassword(password, projectOwner.password);
             if(passwordMatchCheck){
                 return { email: projectOwner.email };
             }
