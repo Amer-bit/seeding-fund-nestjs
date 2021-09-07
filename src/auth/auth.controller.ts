@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { ProjectOwnerRegiseterDto } from './dto/project-owner.register.dto';
@@ -12,7 +12,8 @@ export class AuthController {
 
     @Post('register')
     async register(@Body() registerDto: ProjectOwnerRegiseterDto){
-        return this.authService.register(registerDto);
+        this.authService.register(registerDto);
+        return 'You have been regiesterd successfully';
     }
 
     @Post('login')
@@ -22,6 +23,6 @@ export class AuthController {
 
     @Post('/admin/login')
     async adminLogIn(@Body() loginDto: LoginDto){
-
+        return this.authService.adminLogin(loginDto);
     }
 }
