@@ -7,6 +7,7 @@ import { UserRepository } from './user.repository';
 import { AuthService } from './auth.service';
 import { ProjectOwner, projectOwnerSchema } from './schema/project-owner.schema';
 import { Admin, adminSchema } from './schema/admin.schema';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports:[
@@ -14,6 +15,7 @@ import { Admin, adminSchema } from './schema/admin.schema';
       { name: ProjectOwner.name, schema: projectOwnerSchema },
       { name: Admin.name, schema: adminSchema },
     ]),
+    PassportModule.register({defaultStrategy: 'jwt'}),
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
@@ -26,6 +28,10 @@ import { Admin, adminSchema } from './schema/admin.schema';
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserRepository]
+  providers: [AuthService, UserRepository],
+  exports: [
+    JwtModule,
+    PassportModule,
+  ]
 })
 export class AuthModule {}
