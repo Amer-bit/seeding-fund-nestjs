@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ProjectOwnerModule } from './project-owner/project-owner.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ProjectOwnerModule } from './project-owner/project-owner.module';
     }),
     AuthModule,
     ProjectOwnerModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],
