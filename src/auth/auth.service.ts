@@ -24,6 +24,13 @@ export class AuthService {
         return {accessToken}; 
     }
 
-
+    // Verify admin password and email and return 
+    // accesstoken to be used for later requests
+    async adminlogin(loginDto: LoginDto): Promise<{accessToken: string}>{
+        const { email } = await this.userRepo.adminLogin(loginDto);
+        if(!email) throw new UnauthorizedException("The email or password provided is invalid");
+        const accessToken = await this.jwtService.signAsync({email});
+        return {accessToken}; 
+    }
 
 }
