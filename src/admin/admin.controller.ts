@@ -17,4 +17,9 @@ export class AdminController {
     async changeFundStatus(@Body() changeFundStatusDto: ChangeFundStatusDto){
         return this.adminService.changeFundStatus(changeFundStatusDto);
     }
+
+    @Get('/states')
+    async projectsStates(){
+        return this.adminService.projectsStates();
+    }
 }

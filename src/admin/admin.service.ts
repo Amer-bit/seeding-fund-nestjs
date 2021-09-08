@@ -8,17 +8,17 @@ import { ChangeFundStatusDto } from './dto/change-fund-status.dto';
 export class AdminService {
     constructor(private userRepo: UserRepository){}
 
-    async viewFundRequest(): Promise<{ projects: ProjectOwner[], chartStats }>{
+    async viewFundRequest(): Promise<ProjectOwner[]>{
         const projectOwners = await this.userRepo.getAllUsersProjectsAndUsername();
-        const chartStats = this.chartNumbers(projectOwners);
-        return {projects: projectOwners, chartStats};
+        return projectOwners;
     }
 
     async changeFundStatus(changeFundStatusDto: ChangeFundStatusDto){
         await this.userRepo.changeProjectStatus(changeFundStatusDto);
     }
 
-    private chartNumbers(projectOwners: ProjectOwner[]){
+    async projectsStates(){
+        const projectOwners = await this.viewFundRequest();
         const chartStats =  {
             [ProjectStatus.pending]: 0,
             [ProjectStatus.accepted]: 0,
