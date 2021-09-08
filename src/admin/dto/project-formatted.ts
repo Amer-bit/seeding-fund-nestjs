@@ -2,7 +2,7 @@ export class ProjectFormatted {
     username: string;
     userId: string;
     projectId: string;
-    proejctSector: string;
+    projectSector: string;
     projectName: string;
     projectStatus: string;
     projectDescription: string

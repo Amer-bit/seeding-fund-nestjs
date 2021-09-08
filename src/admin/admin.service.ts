@@ -50,7 +50,7 @@ export class AdminService {
                 project.projectId = dbProject.id
                 project.projectName = dbProject.name
                 project.projectDescription = dbProject.description
-                project.proejctSector = dbProject.sector
+                project.projectSector = dbProject.sector
                 project.projectStatus = dbProject.status
                 projects.push(project);                
             }
